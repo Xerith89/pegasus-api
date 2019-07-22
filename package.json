@@ -1,0 +1,11 @@
+{
+  "name": "pegasus",
+  "version": "1.0.0",
+  "description": "Insurance Underwriting API",
+  "main": "pegasus.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Coupe",
+  "license": "MIT"
+}
