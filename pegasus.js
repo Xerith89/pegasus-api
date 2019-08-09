@@ -1,6 +1,5 @@
 //Bring in dependancies
 const express = require('express');
-const mysql = require('mysql');
 const helmet = require('helmet');
 const cors = require('cors');
 const pegasus = express();
@@ -9,18 +8,17 @@ dotenv.config();
 
 const propowner = require('./src/routes/api/propowner');
 
+const connection = require('./database');
 
-
-//Connect to MySQL
- const connection = mysql.createConnection({
-    host: process.env.TEST_DB_HOST,
-    user: process.env.TEST_DB_USER,
-    database: process.env.TEST_DB
- });
-
-//Connect to SQL
 connection.connect();
-connection.end() 
+connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+    if (err) throw err
+  
+    console.log('The solution is: ', rows[0].solution)
+  })
+  
+connection.end();
+
 
 //Declare middleware
 pegasus.use(express.json());
