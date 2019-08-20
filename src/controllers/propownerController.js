@@ -1,21 +1,16 @@
-const {calculatePremium} = require('../services/calcprem')
+const calculatePremium = require('../services/calcprem')
 
 function process (req, res) {
-    const rate = 0.13;
+    
+    const val = JSON.parse(req.body.declaredValue);
 
-    const obj = JSON.parse(req.body.declaredValue);
+    let price = calculatePremium.calculatePremium(val)
 
-   function calculatePremium(declaredValue) {
-        return declaredValue * rate;
-    }
-
-   let value = calculatePremium(obj)
-
-
+   
     res.json({
         scheme: req.body.scheme,
         declaredValue: req.body.declaredValue,
-        calculatedPremium: value
+        calculatedPremium: price
     });
 }
 
