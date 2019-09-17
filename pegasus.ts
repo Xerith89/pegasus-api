@@ -1,5 +1,7 @@
 import ServiceController from "./src/services/ServiceController";
+import ModelController from "./src/models/ModelController"
 import FlatScheme from "./src/schemes/FlatScheme";
+import FlatSchemeModel from './src/schemes/FlatSchemeModel';
 
 //Bring in core dependencies 
 const express = require('express');
@@ -8,6 +10,7 @@ const cors = require('cors');
 const pegasus = express();
 const dotenv = require('dotenv');
 
+const modelContainer = new ModelController();
 const serviceContainer = new ServiceController();
 
 //Config our local settings
@@ -18,8 +21,11 @@ const connection = require('./database');
 connection.connect();  
 connection.end();
 
-//Bring in your schemes
-const flatScheme = new FlatScheme();
+//Bring in your models
+const flatSchemeModel = new FlatSchemeModel();
+
+//Bring in your schemes and bind a model to it
+const flatScheme = new FlatScheme(flatSchemeModel);
 
 //Register your schemes in the service container here
 serviceContainer.registerServices([flatScheme]);

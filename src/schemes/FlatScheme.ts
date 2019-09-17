@@ -1,21 +1,40 @@
 import { Service } from "../services/Service";
+import {Model} from '../models/Model';
 
 export default class FlatScheme extends Service {
-
-    constructor() {
+    private _model :Model;
+    constructor(model : Model) {
         super()
+        this._model = model;
     }
 
-    running :boolean = false;
+    private running :boolean = false;
+   
     
-    public Start() :void  {
-       this.running = true;
-       console.log("Flat Scheme Service Started...");
+    //attempt to start the service and bind the model
+    public Start() :boolean  {
+        if (this._model === null) {
+            console.log("Flat Scheme Could Not Be Started, Model Binding Error");
+            return false;
+        }
+
+        console.log("Flat Scheme Service Started...");
+        return true;
     }    
 
-    public Stop() :void {
-        this.running = false;
+    public Stop() :boolean {
         console.log("Flat Scheme Service Stopped...");
+        return false;
+    }
+
+    public UpdateStatus(input : boolean) :void {
+        this.running = input;
+    }
+
+    public Invoke() :boolean
+    {
+        throw "Not Implemented";
+        
     }
 
 }

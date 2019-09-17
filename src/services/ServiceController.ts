@@ -15,7 +15,7 @@ export default class ServiceController {
 
     startServices() : void {
       this.serviceContainer.forEach(service => {
-          service.Start();
+          service.UpdateStatus( service.Start() )
       });
     }
 }
