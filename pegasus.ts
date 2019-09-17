@@ -22,9 +22,7 @@ connection.end();
 const flatScheme = new FlatScheme();
 
 //Register your schemes in the service container here
-serviceContainer.registerServices([
-flatScheme
-]);
+serviceContainer.registerServices([flatScheme]);
 
 //Start all registered services
 serviceContainer.startServices();

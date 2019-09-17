@@ -8,12 +8,12 @@ export default class FlatScheme extends Service {
 
     running :boolean = false;
     
-    Start(): void {
+    public Start() :void  {
        this.running = true;
        console.log("Flat Scheme Service Started...");
     }    
 
-    Stop(): void {
+    public Stop() :void {
         this.running = false;
         console.log("Flat Scheme Service Stopped...");
     }

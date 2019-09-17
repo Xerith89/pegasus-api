@@ -7,13 +7,15 @@ export default class ServiceController {
         this.serviceContainer = [];
     }
 
-    registerServices(service: any) : void {
-        this.serviceContainer.push(service);
+    registerServices(service: Service[]) : void {
+        service.forEach(element => {
+            this.serviceContainer.push(element);
+        }); 
     }
 
     startServices() : void {
-        this.serviceContainer.forEach((service) => {
-            console.log(service);
-        });
+      this.serviceContainer.forEach(service => {
+          service.Start();
+      });
     }
 }
