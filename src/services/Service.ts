@@ -8,7 +8,7 @@ export abstract class Service {
     ];
     abstract Start() : boolean;
     abstract Stop() : boolean;
-    abstract Invoke(req: any, res:any): boolean;
+    abstract Invoke(req: any, res:any): any;
     abstract isExposed() :boolean;
     abstract UpdateStatus(input :boolean): void;
     getServiceName():string {

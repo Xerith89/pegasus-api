@@ -15,8 +15,7 @@ router.get('/', function (req : any, res: any) {
     const requestedService = ServiceController.FindService(serviceName);
     if (requestedService !== undefined){
         if (requestedService.isExposed()) {
-            res.send(`Hello ${serviceName}`);
-            requestedService.Invoke(req, res);
+            res.json( requestedService.Invoke(req, res));
         } else {
             res.send("Attempting To Access Unexposed Service From Endpoint");
             logger.log("Attempting To Access Unexposed Service From Endpoint");

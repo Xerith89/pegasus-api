@@ -11,7 +11,7 @@ export default class MyScheme extends Service {
         this._model = model;
        
         //We want this to be a valid URL endpoint
-        this._exposeToBackend = true;
+        this._exposeToBackend = false;
         this._serviceName = serviceName;
         this._logger = new Logger();
     }
@@ -25,12 +25,12 @@ export default class MyScheme extends Service {
             return false;
         }
 
-        this._logger.log("My Scheme Service Started...");
+        this._logger.log(`${this._serviceName} Started... `);
         return true;
     }    
 
     public Stop() :boolean {
-        this._logger.log("My Scheme Service Stopped...");
+        this._logger.log(`${this._serviceName} Stopped...`);
         return false;
     }
 
@@ -38,14 +38,14 @@ export default class MyScheme extends Service {
         this._running = input;
     }
 
-    public Invoke(req: any, res:any) :boolean
+    public Invoke(req: any, res:any) :any
     {
         if (this._running) {
-            this._logger.log('Service Invoked');
+            this._logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`);
             
             //Signal a successful service call
             this._logger.log(this.STATUS[0]);
-            return true;
+            return 1+1;
         }
         //Service failed
         return false;

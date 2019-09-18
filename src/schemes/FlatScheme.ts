@@ -1,11 +1,12 @@
 import { Service } from "../services/Service";
 import {Model} from '../services/Model';
 import Logger from "../services/Logger";
+import ServiceController from "../services/ServiceController";
 
 export default class FlatScheme extends Service {
     private _model :Model;
     private _logger :Logger;
-    
+
     constructor(model : Model, serviceName: string) {
         super()
         this._model = model;
@@ -24,12 +25,12 @@ export default class FlatScheme extends Service {
             return false;
         }
 
-        this._logger.log("Flat Scheme Service Started...");
+        this._logger.log(`${this._serviceName} Started... `);
         return true;
     }    
 
     public Stop() :boolean {
-        this._logger.log("Flat Scheme Service Stopped...");
+        this._logger.log(`${this._serviceName} Stopped... `);
         return false;
     }
 
@@ -37,14 +38,15 @@ export default class FlatScheme extends Service {
         this._running = input;
     }
 
-    public Invoke(req:any, res:any) :boolean
+    public Invoke(req:any, res:any) :any
     {
         if (this._running) {
-            this._logger.log(`Service Invoked From ${req.baseUrl}`);
-            
+            this._logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`);
+            let myScheme : Service = ServiceController.FindService('myscheme');
+            let result:number = myScheme.Invoke(req,res);
             //Signal a successful service call
             this._logger.log(this.STATUS[0]);
-            return true;
+            return result;
         }
         //Service failed
         return false;
