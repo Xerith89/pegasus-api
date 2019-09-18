@@ -2,9 +2,10 @@ export abstract class Service {
     protected _exposeToBackend = false;
     protected _serviceName = "";
     protected readonly STATUS :string[] = [
-        'Service Completed With No Error',
+        'Service Completed Successfully',
         'Service Could Not Complete - Missing Data',
-        'Service Could Not Complete - Bad Data'
+        'Service Could Not Complete - Bad Data',
+        'Error - Service Not Running'
     ];
     abstract Start() : boolean;
     abstract Stop() : boolean;

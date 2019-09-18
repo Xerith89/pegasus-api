@@ -1,8 +1,7 @@
 import ServiceController from './src/services/ServiceController';
-import FlatScheme from './src/schemes/FlatScheme';
-import FlatSchemeModel from './src/schemes/FlatSchemeModel';
-import MyScheme from './src/schemes/MyScheme'
-import MySchemeModel from './src/schemes/MySchemeModel'
+import ExampleScheme from './src/schemes/ExampleScheme';
+import ExampleSchemeModel from './src/schemes/ExampleSchemeModel';
+
 
 namespace Pegasus {
     //Bring in core dependencies 
@@ -24,15 +23,13 @@ namespace Pegasus {
     connection.end();
 
     //Bring in your models
-    const flatSchemeModel = new FlatSchemeModel();
-    const mySchemeModel = new MySchemeModel();
+    const exampleSchemeModel = new ExampleSchemeModel();
 
     //Bring in your schemes and bind a model to it
-    const flatScheme = new FlatScheme(flatSchemeModel, 'flatscheme');
-    const myScheme = new MyScheme(mySchemeModel, "myscheme");
-
+    const exampleScheme = new ExampleScheme(exampleSchemeModel, 'examplescheme');
+  
     //Register your schemes in the service container here
-    serviceContainer.registerServices([flatScheme, myScheme]);
+    serviceContainer.registerServices([exampleScheme]);
 
     //Start all registered services
     serviceContainer.startServices();
