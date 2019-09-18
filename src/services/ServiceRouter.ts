@@ -13,7 +13,7 @@ router.post('/', function (req:any, res:any) {
 router.get('/', function (req : any, res: any) {
     let serviceName:string = req.baseUrl.substr(req.baseUrl.lastIndexOf('/') + 1);
     const requestedService = ServiceController.FindService(serviceName);
-    if (requestedService !== null){
+    if (requestedService !== undefined){
         if (requestedService.isExposed()) {
             res.send(`Hello ${serviceName}`);
             requestedService.Invoke();
