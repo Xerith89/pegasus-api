@@ -13,8 +13,18 @@ router.post('/', function (req:any, res:any) {
 router.get('/', function (req : any, res: any) {
     let serviceName:string = req.baseUrl.substr(req.baseUrl.lastIndexOf('/') + 1);
     const requestedService = ServiceController.FindService(serviceName);
-    (requestedService !== null ? requestedService.Invoke() : logger.log("Service Not Found"))
-    res.send(`Hello ${serviceName}`);
+    if (requestedService !== null){
+        if (requestedService.isExposed()) {
+            res.send(`Hello ${serviceName}`);
+            requestedService.Invoke();
+        } else {
+            res.send("Attempting To Access Unexposed Service From Endpoint");
+            logger.log("Attempting To Access Unexposed Service From Endpoint");
+        }
+    } else {
+        res.send("Service Not Found");
+        logger.log("Service Not Found");
+    }  
 });
 
 module.exports = router; 
