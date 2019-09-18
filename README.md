@@ -20,7 +20,9 @@ import your service and register it in the container by adding it to the service
 
 You are now ready to make POST requests to your service
 
-Contributors are smaller than full blown schemes and cannot be reached by an endpoint but they contribute to the running of schemes and should be reusable components. They are usually pure static functions
+Contributors are small modular functions that you can reused in any of your schemes.
+
+The example shows how to use a contributor in building a scheme response.
 
 ### Pull Requests
 
