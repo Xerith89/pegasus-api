@@ -1,21 +1,25 @@
 import {Service} from './Service'
 
 export default class ServiceController {
-    serviceContainer : Service[];
-
-    constructor(){
-        this.serviceContainer = [];
-    }
+    private static serviceContainer : Service[] = [];
 
     registerServices(service: Service[]) : void {
         service.forEach(element => {
-            this.serviceContainer.push(element);
+            ServiceController.serviceContainer.push(element);
         }); 
     }
 
     startServices() : void {
-      this.serviceContainer.forEach(service => {
+        ServiceController.serviceContainer.forEach(service => {
           service.UpdateStatus( service.Start() )
       });
     }
+
+    static FindService(serviceName :string) : any {
+     return ServiceController.serviceContainer.find((element) => {
+            return serviceName === element.getServiceName();
+        });
+    }
+
+   
 }

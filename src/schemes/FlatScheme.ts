@@ -1,20 +1,22 @@
 import { Service } from "../services/Service";
-import {Model} from '../models/Model';
+import {Model} from '../services/Model';
 
 export default class FlatScheme extends Service {
     private _model :Model;
-    constructor(model : Model) {
+    constructor(model : Model, serviceName: string) {
         super()
         this._model = model;
+        //We want this to be a valid URL endpoint
+        this._exposeToBackend = true;
+        this._serviceName = serviceName;
     }
 
-    private running :boolean = false;
+    private _running :boolean = false;
    
-    
     //attempt to start the service and bind the model
     public Start() :boolean  {
         if (this._model === null) {
-            console.log("Flat Scheme Could Not Be Started, Model Binding Error");
+            console.log("Model Binding Error");
             return false;
         }
 
@@ -28,13 +30,25 @@ export default class FlatScheme extends Service {
     }
 
     public UpdateStatus(input : boolean) :void {
-        this.running = input;
+        this._running = input;
     }
 
     public Invoke() :boolean
     {
-        throw "Not Implemented";
+        if (this._running) {
+            console.log('Service Invoked');
+            
+            //Signal a successful service call
+            console.log(this.STATUS[0]);
+            return true;
+        }
+        //Service failed
+        return false;
         
+    }
+
+    public isExposed() :boolean{
+        return this._exposeToBackend;
     }
 
 }
