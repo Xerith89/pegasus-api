@@ -14,7 +14,7 @@ Typically the following steps are what you need to get going
 
 This is the core of your service where your business logic resides, any calls to a database, other services or APIs etc.. should be done here - typically in the invoke method. 
 
-Start and Stop have 1 requirement in that they return true and false respectively, other than that you can do whatever you wish in these methods. 
+Start and Stop are where you put in any logic or cleanup for when the service starts and stops.
 
 ##### Define a scheme model 
 
