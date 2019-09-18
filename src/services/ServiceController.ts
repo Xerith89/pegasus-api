@@ -18,6 +18,15 @@ export default class ServiceController {
         ServiceController.serviceContainer.forEach(service => {
             this.logger.log(`${service.getServiceName()} Started Successfully`);
           service.updateRunningStatus( true );
+          service.Start();
+      });
+    }
+
+    stopServices(): void {
+        ServiceController.serviceContainer.forEach(service => {
+            this.logger.log(`${service.getServiceName()} Stopped Successfully`);
+          service.updateRunningStatus( false );
+          service.Stop();
       });
     }
 
