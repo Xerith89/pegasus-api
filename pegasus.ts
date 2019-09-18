@@ -25,8 +25,8 @@ namespace Pegasus {
     //Bring in your models
     const exampleSchemeModel = new ExampleSchemeModel();
 
-    //Bring in your schemes and bind a model to it
-    const exampleScheme = new ExampleScheme(exampleSchemeModel, 'examplescheme');
+    //Bring in your schemes, bind the model, name them and decide if they are exposed to the endpoint
+    const exampleScheme = new ExampleScheme(exampleSchemeModel, 'examplescheme', true);
   
     //Register your schemes in the service container here
     serviceContainer.registerServices([exampleScheme]);

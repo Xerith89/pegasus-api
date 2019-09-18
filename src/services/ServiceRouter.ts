@@ -13,7 +13,8 @@ router.post('/', function (req:any, res:any) {
         if (requestedService.isExposed()) {
 
             //Check we have a valid input for our model
-            if (!requestedService.validateInput(req)) {
+
+            if (!requestedService.validateInput(req, requestedService._model)) {
                 res.status(400).end();
                 logger.log(`Bad Request ${serviceName}`)
                 return;

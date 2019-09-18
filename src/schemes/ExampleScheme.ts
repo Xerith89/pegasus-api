@@ -4,14 +4,13 @@ import Logger from "../services/Logger";
 import sayHello from '../contributors/ExampleContributor';
 
 export default class ExampleScheme extends Service {
-    private _model :Model;
+ 
     private _logger :Logger;
 
-    constructor(model : Model, serviceName: string) {
-        super()
-        this._model = model;
+    constructor(model : Model, serviceName: string, exposeToBackend :boolean) {
+        super(model)
         //We want this to be a valid URL endpoint
-        this._exposeToBackend = true;
+        this._exposeToBackend = exposeToBackend;
         this._serviceName = serviceName;
         this._logger = new Logger();
 
@@ -19,8 +18,6 @@ export default class ExampleScheme extends Service {
         
     }
 
-    private _running :boolean = false;
-   
     //attempt to start the service and bind the model
     public Start() :boolean  {
         if (this._model === null) {
@@ -37,13 +34,9 @@ export default class ExampleScheme extends Service {
         return false;
     }
 
-    public UpdateStatus(input : boolean) :void {
-        this._running = input;
-    }
-
     public Invoke(req:any, res:any) :any
     {
-        if (this._running) {
+        if (this._status) {
             this._logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`);
             
             //Signal a successful service call
@@ -57,19 +50,6 @@ export default class ExampleScheme extends Service {
         this._logger.log(this.STATUS[3]);
         return false;
         
-    }
-
-    public isExposed() :boolean{
-        return this._exposeToBackend;
-    }
-
-    //Check that the model data is within the body of the request
-    private validateInput(req: any) :boolean {
-        for (let [key] of Object.entries(this._model.getModel())) {
-            if (!req.body.hasOwnProperty(key))
-                return false;
-        }
-        return true;
     }
 
 }
