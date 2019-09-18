@@ -57,4 +57,13 @@ export default class FlatScheme extends Service {
         return this._exposeToBackend;
     }
 
+    //Check that the model data is within the body of the request
+    private validateInput(req: any) :boolean {
+        for (let [key] of Object.entries(this._model.getModel())) {
+            if (!req.body.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    }
+
 }

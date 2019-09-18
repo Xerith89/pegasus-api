@@ -1,10 +1,16 @@
 import { Model } from "../services/Model";
 
 export default class FlatSchemeModel implements Model {
+    
+    getModel(): object {
+        return this.attributes;
+    }
     constructor() {} 
 
-    postCode: string = "";
-    declaredValue: number = 0;
+    attributes:object = {
+        postCode:  "",
+        declaredValue:  0,
+    }
 
     responses :string[] = [
         'Quote Returned Successfully',
