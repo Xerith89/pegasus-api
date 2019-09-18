@@ -49,9 +49,8 @@ export default class ExampleScheme extends Service {
             //Signal a successful service call
             this._logger.log(this.STATUS[0]);
 
-            //We are returning a string that will be sent as a response but you can build and send any kind of response
-            //We are using a contributor function here
-            return `${sayHello(req.body.name)}, you are ${req.body.age} years old`;
+            //We are using a contributor function here to build our json response
+            return {name: req.body.name, age:req.body.age, message: sayHello(req.body.name)} ;
         }
 
         //Service is not running
