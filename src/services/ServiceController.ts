@@ -17,7 +17,7 @@ export default class ServiceController {
     startServices() : void {
         ServiceController.serviceContainer.forEach(service => {
             this.logger.log(`${service.getServiceName()} Started Successfully`);
-          service.updateStatus( service.Start() )
+          service.updateRunningStatus( true );
       });
     }
 

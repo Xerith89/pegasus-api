@@ -19,19 +19,15 @@ export default class ExampleScheme extends Service {
     }
 
     //attempt to start the service and bind the model
-    public Start() :boolean  {
+    public Start() :void  {
         if (this._model === null) {
            this._logger.log("Model Binding Error");
-            return false;
         }
-
         this._logger.log(`${this._serviceName} Started... `);
-        return true;
     }    
 
-    public Stop() :boolean {
+    public Stop() :void {
         this._logger.log(`${this._serviceName} Stopped... `);
-        return false;
     }
 
     public Invoke(req:any, res:any) :any
@@ -40,14 +36,18 @@ export default class ExampleScheme extends Service {
             this._logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`);
             
             //Signal a successful service call
-            this._logger.log(this.STATUS[0]);
+            this._logger.log("Service Complete Successfully");
 
             //We are using a contributor function here to build our json response
-            return {name: req.body.name, age:req.body.age, message: sayHello(req.body.name)} ;
+            return {
+                name: req.body.name, 
+                age:req.body.age, 
+                message: sayHello(req.body.name)
+            } ;
         }
 
         //Service is not running
-        this._logger.log(this.STATUS[3]);
+        this._logger.log("Service Not Running");
         return false;
         
     }
