@@ -1,8 +1,9 @@
 import { Service } from "../src/core/Service";
 import {Model} from '../src/core/Model';
+import sayHello from '../src/contributors/ExampleContributor';
+import Logger from '../src/core/Logger'
 
-
-export default class ExampleScheme extends Service {
+export default class TestService extends Service {
  
     constructor(model : Model, serviceName: string, exposeToBackend :boolean) {
         super(model)
@@ -14,32 +15,33 @@ export default class ExampleScheme extends Service {
     //attempt to start the service and bind the model
     public start() :void  {
         if (this._model === null) {
-           this._logger.log("Model Binding Error");
+           Logger.log("Model Binding Error", true, true);
         }
-        this._logger.log(`${this._serviceName} Started... `);
+        Logger.log(`${this._serviceName} Started... `, true, true);
     }    
 
     public stop() :void {
-        this._logger.log(`${this._serviceName} Stopped... `);
+        Logger.log(`${this._serviceName} Stopped... `, true, true);
     }
 
     public invoke(req:any, res:any) :any
     {
         if (this._status) {
-            this._logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`);
+            Logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`, true,true);
             
             //Signal a successful service call
-            this._logger.log("Service Complete Successfully");
+            Logger.log("Service Complete Successfully", true, true);
 
             //We are using a contributor function here to build our json response
             return {
                 name: req.body.name, 
                 age:req.body.age, 
+                message: sayHello(req.body.name)
             } ;
         }
 
         //Service is not running
-        this._logger.log("Service Not Running");
+        Logger.log("Service Not Running", true, true);
         return {
             status: "Service Unavailable"
         };

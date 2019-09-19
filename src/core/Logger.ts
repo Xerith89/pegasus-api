@@ -3,23 +3,15 @@ import { Stream } from "stream";
 var fs = require("fs");
 
 export default class Logger {
-    private _consoleLog:boolean;
-    private _textLog:boolean
-    constructor(enableConsole:boolean, enableText:boolean) {
-        this._consoleLog = enableConsole;
-        this._textLog = enableText;
-    }
+ 
     
-    log(input :string) {
-        if (this._textLog) {
-           const stream =  fs.createWriteStream(`logs/log.txt`);
-            stream.once('open', function(fd:any){
-                stream.write(input);
-                stream.end();
+    static log(input :string, writeToFile:boolean, writeToConsole:boolean) {
+        if (writeToFile) {
+            fs.appendFile("logs/log.txt", `${input}\r`, function(err:any){
             });
         }
 
-        if (this._consoleLog) {
+        if (writeToConsole) {
             console.log(input);
         }
     }

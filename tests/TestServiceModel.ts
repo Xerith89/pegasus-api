@@ -1,6 +1,6 @@
-import { Model } from '../src/core/Model'
+import { Model } from "../src/core/Model";
 
-export default class ExampleServiceModel implements Model {
+export default class TestServiceModel implements Model {
     
     getModel(): {} {
         return this.attributes;
