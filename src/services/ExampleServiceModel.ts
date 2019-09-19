@@ -1,4 +1,4 @@
-import { Model } from "../services/Model";
+import { Model } from "../core/Model";
 
 export default class FlatSchemeModel implements Model {
     

@@ -1,6 +1,6 @@
-import { Service } from "../services/Service";
-import {Model} from '../services/Model';
-import Logger from "../services/Logger";
+import { Service } from "../core/Service";
+import {Model} from '../core/Model';
+import Logger from "../core/Logger";
 import sayHello from '../contributors/ExampleContributor';
 
 export default class ExampleScheme extends Service {
