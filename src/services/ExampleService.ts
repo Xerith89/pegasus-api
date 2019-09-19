@@ -1,21 +1,14 @@
 import { Service } from "../core/Service";
 import {Model} from '../core/Model';
-import Logger from "../core/Logger";
 import sayHello from '../contributors/ExampleContributor';
 
 export default class ExampleScheme extends Service {
  
-    private _logger :Logger;
-
     constructor(model : Model, serviceName: string, exposeToBackend :boolean) {
         super(model)
-        //We want this to be a valid URL endpoint
+        //Assign member data
         this._exposeToBackend = exposeToBackend;
         this._serviceName = serviceName;
-        this._logger = new Logger();
-
-        ///Service Constants Go Here
-        
     }
 
     //attempt to start the service and bind the model
