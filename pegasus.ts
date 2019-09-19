@@ -43,18 +43,31 @@ rl.setPrompt('Enter Command > ');
 rl.prompt();
 
 rl.on('line', function(line:string) {
-    switch(line.trim()) {
+    const command = line.split(" ");
+    switch(command[0]) {
         case 'stopall' :
             serviceContainer.stopServices();
             break;
         case 'startall' :
             serviceContainer.startServices();
             break;
-        case 'close':
+        case 'start' :
+            serviceContainer.startService(command[1]);
+            break;
+        case 'stop' :
+            serviceContainer.stopService(command[1]);
+            break;
+        case 'restart' :
+            serviceContainer.restartService(command[1]);
+            break;
+        case 'shutdown':
             server.close();
             break;
         case 'listall':
             serviceContainer.listAll();
+            break;
+        case 'restartall':
+            serviceContainer.restartAll();
             break;
         default:
             console.log('Unknown Command');

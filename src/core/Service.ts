@@ -5,16 +5,16 @@ export abstract class Service {
     protected _serviceName = "";
     protected _status = false;
     protected _logger: Logger;
-    protected _model:object = {};
+    protected _model: {} = {};
     
     constructor(model: any){
         this._model = model.getModel();
         this._logger = new Logger();
     }
 
-    abstract Start() : void;
-    abstract Stop() : void;
-    abstract Invoke(req: any, res:any): object;
+    abstract start() : void;
+    abstract stop() : void;
+    abstract invoke(req: any, res:any): {};
 
     //Check that the model data is within the body of the request
     protected validateInput(req: any) :boolean {

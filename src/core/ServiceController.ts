@@ -19,10 +19,22 @@ export default class ServiceController {
             if (!service.isRunning()) {
                 this.logger.log(`${service.getServiceName()} Started Successfully`);
                 service.updateRunningStatus( true );
-                service.Start();
+                service.start();
             }
       });
     }
+
+    startService(serviceName:string) : void {
+       const service = ServiceController.FindService(serviceName);
+       service.updateRunningStatus( true );
+       service.start();
+    }
+
+    stopService(serviceName:string) : void {
+        const service = ServiceController.FindService(serviceName);
+        service.updateRunningStatus( false );
+        service.stop();
+     }
 
     stopServices(): void {
         this.logger.log("Attempting To Stop All Services...");
@@ -30,7 +42,7 @@ export default class ServiceController {
             if (service.isRunning()){
                 this.logger.log(`${service.getServiceName()} Stopped Successfully`);
                 service.updateRunningStatus( false );
-                service.Stop();
+                service.stop();
             }
       });
     }
@@ -40,6 +52,27 @@ export default class ServiceController {
             this.logger.log(`${service.getServiceName()} Running: ${service.isRunning()}`);
       });
     }
+
+    restartAll():void {
+        this.logger.log("Restarting All Services...");
+        ServiceController.serviceContainer.forEach(service => {
+            if (service.isRunning()){
+                service.updateRunningStatus( false );
+                service.stop();
+                service.updateRunningStatus( true );
+                service.start();
+            }
+        });
+        this.logger.log("All Services Restarted");
+    }
+
+    restartService(serviceName:string) : void {
+        const service = ServiceController.FindService(serviceName);
+        service.updateRunningStatus( false );
+        service.stop();
+        service.updateRunningStatus( true );
+        service.start();
+     }
 
     static FindService(serviceName :string) : any {
      return ServiceController.serviceContainer.find((element) => {

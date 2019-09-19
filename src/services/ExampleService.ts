@@ -12,18 +12,18 @@ export default class ExampleScheme extends Service {
     }
 
     //attempt to start the service and bind the model
-    public Start() :void  {
+    public start() :void  {
         if (this._model === null) {
            this._logger.log("Model Binding Error");
         }
         this._logger.log(`${this._serviceName} Started... `);
     }    
 
-    public Stop() :void {
+    public stop() :void {
         this._logger.log(`${this._serviceName} Stopped... `);
     }
 
-    public Invoke(req:any, res:any) :any
+    public invoke(req:any, res:any) :any
     {
         if (this._status) {
             this._logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`);
