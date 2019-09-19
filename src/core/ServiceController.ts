@@ -87,12 +87,18 @@ export default class ServiceController {
 
     listAll(targetContainer?: Service[]):void {
         if (targetContainer) {
+            Logger.log('********************************', true,true);
+            Logger.log('* Service Name       | Running *', true,true);
+            Logger.log('*********************|**********', true,true);
             targetContainer.forEach(service => {
-                Logger.log(`${service.getServiceName()} | Running: ${service.isRunning()}`, true,true);
+                Logger.log(`${service.getServiceName()}    |${service.isRunning()}`, true,true);
           });
         } else {
+            Logger.log('********************************', true,true);
+            Logger.log('* Service Name       | Running *', true,true);
+            Logger.log('*********************|**********', true,true);
             ServiceController.serviceContainer.forEach(service => {
-                Logger.log(`${service.getServiceName()} | Running: ${service.isRunning()}`, true,true);
+                Logger.log(`* ${service.getServiceName()}     | ${service.isRunning()}    *`, true,true);
           });
         }
         
