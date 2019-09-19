@@ -14,7 +14,7 @@ export abstract class Service {
 
     abstract Start() : void;
     abstract Stop() : void;
-    abstract Invoke(req: any, res:any): any;
+    abstract Invoke(req: any, res:any): object;
 
     //Check that the model data is within the body of the request
     protected validateInput(req: any) :boolean {

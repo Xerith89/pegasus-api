@@ -41,7 +41,9 @@ export default class ExampleScheme extends Service {
 
         //Service is not running
         this._logger.log("Service Not Running");
-        return false;
+        return {
+            status: "Service Unavailable"
+        };
         
     }
 

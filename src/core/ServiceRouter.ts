@@ -8,14 +8,12 @@ const logger = new Logger();
 router.post('/', function (req:any, res:any) {
     let serviceName:string = req.baseUrl.substr(req.baseUrl.lastIndexOf('/') + 1);
     const requestedService = ServiceController.FindService('exampleservice');
-    console.log(serviceName);
-    console.log(requestedService);
+    logger.log(requestedService);
     if (requestedService !== undefined){
 
         if (requestedService.isExposed()) {
 
             //Check we have a valid input for our model
-
             if (!requestedService.validateInput(req, requestedService._model)) {
                 res.status(400).end();
                 logger.log(`Bad Request ${serviceName}`)

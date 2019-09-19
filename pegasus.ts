@@ -9,7 +9,6 @@ import dotenv = require('dotenv');
 //Bring in core dependencies 
 const pegasus = express();
 const serviceRouter = require('./src/core/ServiceRouter');
-const prompt = require('prompt');
 const serviceContainer = new ServiceController();
 
 //Config our local settings
@@ -37,26 +36,36 @@ const port = process.env.DEFAULT_PORT;
 
 const server = pegasus.listen(port);
 
-prompt.start();
+var readline = require('readline'),
+    rl = readline.createInterface(process.stdin, process.stdout);
 
-prompt.get('command', function (err:any, result:any) {
-    switch(result.command) {
+rl.setPrompt('Enter Command > ');
+rl.prompt();
+
+rl.on('line', function(line:string) {
+    switch(line.trim()) {
+        case 'stopall' :
+            serviceContainer.stopServices();
+            break;
+        case 'startall' :
+            serviceContainer.startServices();
+            break;
         case 'close':
             server.close();
-            break;
-        case 'stopall':
-            serviceContainer.stopServices();
             break;
         case 'listall':
             serviceContainer.listAll();
             break;
         default:
-            console.log("Invalid Command");
-            break;
+            console.log('Unknown Command');
+        break;
     }
-  });
+    rl.prompt();
+}).on('close', function() {
+    process.exit(0);
+});
 
-    //Stop all services on server close
+//Stop all services on server close
 server.on('close', function() {
     serviceContainer.stopServices();
     console.log('Pegasus Has Exited.');
