@@ -88,7 +88,6 @@ test('stopServices should stop all services ', () => {
     //Assert
     expect(service.isRunning()).toBeFalsy();
     expect(secondService.isRunning()).toBeFalsy();
-    
 });
 
 
