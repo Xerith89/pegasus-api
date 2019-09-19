@@ -1,32 +1,28 @@
 import ServiceController from './src/core/ServiceController';
-import ExampleScheme from './src/services/ExampleService';
-import ExampleSchemeModel from './src/services/ExampleServiceModel';
+import ExampleService from './src/services/ExampleService';
+import ExampleServiceModel from './src/services/ExampleServiceModel';
 import express = require('express');
 import helmet = require('helmet');
 import cors = require('cors');
-
 import dotenv = require('dotenv');
-
-
-//TODO - console input commands, logging to files and console
 
 //Bring in core dependencies 
 const pegasus = express();
-const serviceRouter = require('./src/services/ServiceRouter');
+const serviceRouter = require('./src/core/ServiceRouter');
+const prompt = require('prompt');
 const serviceContainer = new ServiceController();
-
 
 //Config our local settings
 dotenv.config();
 
 //Bring in your models
-const exampleSchemeModel = new ExampleSchemeModel();
+const exampleServiceModel = new ExampleServiceModel();
 
 //Bring in your schemes, bind the model, name them and decide if they are exposed to the endpoint
-const exampleScheme = new ExampleScheme(exampleSchemeModel, 'examplescheme', true);
+const exampleService = new ExampleService(exampleServiceModel, 'exampleservice', true);
 
 //Register your schemes in the service container here
-serviceContainer.registerServices([exampleScheme]);
+serviceContainer.registerServices([exampleService]);
 
 //Start all registered services
 serviceContainer.startServices();
@@ -41,11 +37,29 @@ const port = process.env.DEFAULT_PORT;
 
 const server = pegasus.listen(port);
 
+prompt.start();
+
+prompt.get('command', function (err:any, result:any) {
+    switch(result.command) {
+        case 'close':
+            server.close();
+            break;
+        case 'stopall':
+            serviceContainer.stopServices();
+            break;
+        case 'listall':
+            serviceContainer.listAll();
+            break;
+        default:
+            console.log("Invalid Command");
+            break;
+    }
+  });
+
     //Stop all services on server close
 server.on('close', function() {
     serviceContainer.stopServices();
+    console.log('Pegasus Has Exited.');
 });
-
-server.close();
 
 module.exports = server;

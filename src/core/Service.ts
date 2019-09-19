@@ -25,12 +25,12 @@ export abstract class Service {
         }
         return true;
     }
-
-    public isExposed() :boolean {
+    
+    isExposed() :boolean {
         return this._exposeToBackend;
     }
 
-    public isRunning() :boolean {
+    isRunning() :boolean {
         return this._status;
     }
 
@@ -38,7 +38,7 @@ export abstract class Service {
         this._status = input;
     }
 
-    public getServiceName():string {
+    getServiceName():string {
         return this._serviceName;
     }
 

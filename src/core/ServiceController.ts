@@ -23,10 +23,19 @@ export default class ServiceController {
     }
 
     stopServices(): void {
+        this.logger.log("Attempting To Stop All Services...");
         ServiceController.serviceContainer.forEach(service => {
-            this.logger.log(`${service.getServiceName()} Stopped Successfully`);
-          service.updateRunningStatus( false );
-          service.Stop();
+            if (service.isRunning()){
+                this.logger.log(`${service.getServiceName()} Stopped Successfully`);
+                service.updateRunningStatus( false );
+                service.Stop();
+            }
+      });
+    }
+
+    listAll():void {
+        ServiceController.serviceContainer.forEach(service => {
+            this.logger.log(`${service.getServiceName()} Running: ${service.isRunning()}`);
       });
     }
 

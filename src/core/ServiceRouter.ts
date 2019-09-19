@@ -7,7 +7,9 @@ const logger = new Logger();
 
 router.post('/', function (req:any, res:any) {
     let serviceName:string = req.baseUrl.substr(req.baseUrl.lastIndexOf('/') + 1);
-    const requestedService = ServiceController.FindService(serviceName);
+    const requestedService = ServiceController.FindService('exampleservice');
+    console.log(serviceName);
+    console.log(requestedService);
     if (requestedService !== undefined){
 
         if (requestedService.isExposed()) {
@@ -29,7 +31,7 @@ router.post('/', function (req:any, res:any) {
     } else {
         //Can't find the service from the endpoint
         res.status(404).end();
-        logger.log("Service Not Found");
+        logger.log(`${serviceName} Not Found`);
     }  
 });
 
