@@ -1,5 +1,5 @@
 export interface Model {
 
-    getModel() :object;
+    getModel() :{};
    
 }
