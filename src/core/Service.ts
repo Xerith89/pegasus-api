@@ -9,7 +9,7 @@ export abstract class Service {
     
     constructor(model: any){
         this._model = model.getModel();
-        this._logger = new Logger();
+        this._logger = new Logger(true,true);
     }
 
     abstract start() : void;

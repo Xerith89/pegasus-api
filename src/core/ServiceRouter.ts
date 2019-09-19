@@ -3,7 +3,7 @@ import Logger from './Logger';
 
 const express = require('express');
 const router = express.Router();
-const logger = new Logger();
+const logger = new Logger(true,true);
 
 router.post('/', function (req:any, res:any) {
     let serviceName:string = req.baseUrl.substr(req.baseUrl.lastIndexOf('/') + 1);

@@ -3,7 +3,7 @@ import Logger from './Logger';
 
 export default class ServiceController {
 
-    logger = new Logger();
+    logger = new Logger(true,true);
 
     private static serviceContainer : Service[] = [];
 
