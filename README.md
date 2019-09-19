@@ -50,6 +50,10 @@ The follow commands are available from the console whilst the system is running 
 
 `stopall` - Stop all running services.
 
+`restartall` - Restart all running services.
+
+`restart {servicename}` - Restart the specific service.
+
 `listall` - Show all service names and statuses.
 
 ### Pull Requests
