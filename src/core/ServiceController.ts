@@ -64,42 +64,75 @@ export default class ServiceController {
         }
      }
 
-    stopServices(): void {
-        this.logger.log("Attempting To Stop All Services...");
-        ServiceController.serviceContainer.forEach(service => {
-            if (service.isRunning()){
-                this.logger.log(`${service.getServiceName()} Stopped Successfully`);
-                service.updateRunningStatus( false );
-                service.stop();
-            }
-      });
+    stopServices(targetContainer?: Service[]): void {
+        if (targetContainer) {
+            this.logger.log("Attempting To Stop All Services...");
+            targetContainer.forEach(service => {
+                if (service.isRunning()){
+                    this.logger.log(`${service.getServiceName()} Stopped Successfully`);
+                    service.updateRunningStatus( false );
+                    service.stop();
+                }
+          });
+        } else {
+            this.logger.log("Attempting To Stop All Services...");
+            ServiceController.serviceContainer.forEach(service => {
+                if (service.isRunning()){
+                    this.logger.log(`${service.getServiceName()} Stopped Successfully`);
+                    service.updateRunningStatus( false );
+                    service.stop();
+                }
+          });
+        }
     }
 
-    listAll():void {
-        ServiceController.serviceContainer.forEach(service => {
-            this.logger.log(`${service.getServiceName()} Running: ${service.isRunning()}`);
-      });
+    listAll(targetContainer?: Service[]):void {
+        if (targetContainer) {
+            targetContainer.forEach(service => {
+                this.logger.log(`${service.getServiceName()} Running: ${service.isRunning()}`);
+          });
+        } else {
+            ServiceController.serviceContainer.forEach(service => {
+                this.logger.log(`${service.getServiceName()} Running: ${service.isRunning()}`);
+          });
+        }
+        
     }
 
-    restartAll():void {
-        this.logger.log("Restarting All Services...");
-        ServiceController.serviceContainer.forEach(service => {
-            if (service.isRunning()){
-                service.updateRunningStatus( false );
-                service.stop();
-                service.updateRunningStatus( true );
-                service.start();
-            }
-        });
-        this.logger.log("All Services Restarted");
+    restartAll(targetContainer?: Service[]):void {
+        if (targetContainer) {
+            this.logger.log("Restarting All Services...");
+            targetContainer.forEach(service => {
+                if (service.isRunning()){
+                    service.updateRunningStatus( false );
+                    service.stop();
+                    service.updateRunningStatus( true );
+                    service.start();
+                }
+            });
+            this.logger.log("All Services Restarted");
+        } else {
+            this.logger.log("Restarting All Services...");
+            ServiceController.serviceContainer.forEach(service => {
+                if (service.isRunning()){
+                    service.updateRunningStatus( false );
+                    service.stop();
+                    service.updateRunningStatus( true );
+                    service.start();
+                }
+            });
+            this.logger.log("All Services Restarted");
+        }
     }
 
     restartService(serviceName:string) : void {
         const service = ServiceController.FindService(serviceName);
-        service.updateRunningStatus( false );
-        service.stop();
-        service.updateRunningStatus( true );
-        service.start();
+        if (service.isRunning()) {
+            service.updateRunningStatus( false );
+            service.stop();
+            service.updateRunningStatus( true );
+            service.start();
+        }
      }
 
     static FindService(serviceName :string, targetContainer?: Service[]) : any {

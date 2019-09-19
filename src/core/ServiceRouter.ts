@@ -7,7 +7,7 @@ const logger = new Logger();
 
 router.post('/', function (req:any, res:any) {
     let serviceName:string = req.baseUrl.substr(req.baseUrl.lastIndexOf('/') + 1);
-    const requestedService = ServiceController.FindService('exampleservice');
+    const requestedService = ServiceController.FindService(serviceName);
     logger.log(requestedService);
     if (requestedService !== undefined){
 
