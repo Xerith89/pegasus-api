@@ -26,13 +26,19 @@ export abstract class Service {
         return true;
     }
 
-    isExposed() :boolean {
+    public isExposed() :boolean {
         return this._exposeToBackend;
-     }
+    }
+
+    public isRunning() :boolean {
+        return this._status;
+    }
+
     updateRunningStatus(input :boolean): void {
         this._status = input;
     }
-    getServiceName():string {
+
+    public getServiceName():string {
         return this._serviceName;
     }
 
