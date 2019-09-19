@@ -32,7 +32,7 @@ n.b. The scheme name is important as it will be used for the url endpoint and it
 
 ##### Add your scheme to the register services array
 
-Pegasus will automatically create a route for your endpoint if you wish for the service to be exposed.
+Pegasus will automatically create a route for your endpoint if you wish for the service to be exposed. In order to facilitate testing and other future expansions, it is possible to pass a container as a separate parameter if you do not want your services going into the default container.
 
 ##### You are now ready to make POST requests to your service!
 
