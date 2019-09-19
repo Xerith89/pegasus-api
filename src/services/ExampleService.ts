@@ -1,6 +1,7 @@
 import { Service } from "../core/Service";
 import {Model} from '../core/Model';
 import sayHello from '../contributors/ExampleContributor';
+import Logger from '../core/Logger'
 
 export default class ExampleScheme extends Service {
  
@@ -14,22 +15,22 @@ export default class ExampleScheme extends Service {
     //attempt to start the service and bind the model
     public start() :void  {
         if (this._model === null) {
-           this._logger.log("Model Binding Error");
+           Logger.log("Model Binding Error", true, true);
         }
-        this._logger.log(`${this._serviceName} Started... `);
+        Logger.log(`${this._serviceName} Started... `, true, true);
     }    
 
     public stop() :void {
-        this._logger.log(`${this._serviceName} Stopped... `);
+        Logger.log(`${this._serviceName} Stopped... `, true, true);
     }
 
     public invoke(req:any, res:any) :any
     {
         if (this._status) {
-            this._logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`);
+            Logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`, true,true);
             
             //Signal a successful service call
-            this._logger.log("Service Complete Successfully");
+            Logger.log("Service Complete Successfully", true, true);
 
             //We are using a contributor function here to build our json response
             return {
@@ -40,7 +41,7 @@ export default class ExampleScheme extends Service {
         }
 
         //Service is not running
-        this._logger.log("Service Not Running");
+        Logger.log("Service Not Running", true, true);
         return {
             status: "Service Unavailable"
         };

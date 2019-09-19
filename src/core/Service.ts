@@ -1,15 +1,13 @@
-import Logger from "./Logger";
 
 export abstract class Service {
     protected _exposeToBackend = false;
     protected _serviceName = "";
     protected _status = false;
-    protected _logger: Logger;
+
     protected _model: {} = {};
-    
     constructor(model: any){
         this._model = model.getModel();
-        this._logger = new Logger();
+
     }
 
     abstract start() : void;
