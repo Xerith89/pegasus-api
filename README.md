@@ -1,5 +1,7 @@
 # Pegasus API
 
+[![CircleCI](https://circleci.com/gh/Xerith89/pegasus-api.svg?style=svg)](https://circleci.com/gh/Xerith89/pegasus-api)
+
 ### What is it?
 
 A lightweight open source API for creating, running and managing micro-services that interact through web endpoints, written in TypeScript using Node/Express.
