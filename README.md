@@ -34,8 +34,18 @@ n.b. The scheme name is important as it will be used for the url endpoint and it
 
 Pegasus will automatically create a route for your endpoint if you wish for the service to be exposed.
 
+
 ##### You are now ready to make POST requests to your service!
 
+#### Console Commands
+
+The follow commands are available from the console whilst the system is running - 
+
+`close` - Performs a graceful close on the Pegasus server after stopping all services. 
+
+`open` - Opens the Pegasus server for connections.
+
+`stopall` - Stop all running services
 
 ### Pull Requests
 
