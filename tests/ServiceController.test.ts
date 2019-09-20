@@ -1,6 +1,5 @@
 import ServiceController from '../src/core/ServiceController';
 import {Service} from '../src/core/Service';
-import TestServiceModel from './TestServiceModel';
 import TestService from './TestService';
 
 
@@ -8,9 +7,15 @@ test('registerServices should add a service correctly', () => {
     //Arrange
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
-    const model = new TestServiceModel();
-    const service = new TestService(model, "testservice",true);
-    const secondService = new TestService(model, "testservicetwo",true);
+  
+    const service = new TestService({
+        name: "", 
+        age: 0}
+        , "testservice",true);
+    const secondService = new TestService({
+        name: "",
+            age:0
+        }, "testservicetwo",true);
 
     //Act
     controller.registerServices([service, secondService], serviceContainer);
@@ -23,9 +28,14 @@ test('startServices should start everything correctly', () => {
     //Arrange
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
-    const model = new TestServiceModel();
-    const service = new TestService(model, "testservice",true);
-    const secondService = new TestService(model, "testservicetwo",true);
+    const service = new TestService({
+        name: "", 
+        age: 0}
+        , "testservice",true);
+    const secondService = new TestService({
+        name: "",
+         age:0
+        }, "testservicetwo",true);
     controller.registerServices([service, secondService], serviceContainer);
 
     //Act
@@ -41,8 +51,11 @@ test('stopService should stop the particular service ', () => {
     //Arrange
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
-    const model = new TestServiceModel();
-    const service = new TestService(model, "testservice",true);
+    
+    const service = new TestService({
+        name: "", 
+        age: 0}
+        , "testservice",true);
     controller.registerServices([service], serviceContainer);
     controller.startServices(serviceContainer);
 
@@ -58,8 +71,10 @@ test('startService should start the particular service ', () => {
     //Arrange
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
-    const model = new TestServiceModel();
-    const service = new TestService(model, "testservice",true);
+    const service = new TestService({
+        name: "", 
+        age: 0}
+        , "testservice",true);
     controller.registerServices([service], serviceContainer);
     controller.startServices(serviceContainer);
 
@@ -76,9 +91,13 @@ test('stopServices should stop all services ', () => {
     //Arrange
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
-    const model = new TestServiceModel();
-    const service = new TestService(model, "testservice",true);
-    const secondService = new TestService(model, "testservicetwo",true);
+    const service = new TestService({
+        name: "", 
+        age: 0}
+        , "testservice",true);
+    const secondService = new TestService( {name: "", 
+    age: 0}
+    , "testservicetwo",true);
     controller.registerServices([service,secondService], serviceContainer);
     controller.startServices(serviceContainer);
 

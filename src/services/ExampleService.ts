@@ -1,12 +1,11 @@
 import { Service } from "../core/Service";
-import {Model} from '../core/Model';
 import sayHello from '../contributors/ExampleContributor';
 import Logger from '../core/Logger'
 
 export default class ExampleScheme extends Service {
  
-    constructor(model : Model, serviceName: string, exposeToBackend :boolean) {
-        super(model)
+    constructor(attributes: {}, serviceName: string, exposeToBackend :boolean) {
+        super(attributes)
         //Assign member data
         this._exposeToBackend = exposeToBackend;
         this._serviceName = serviceName;
@@ -14,9 +13,6 @@ export default class ExampleScheme extends Service {
 
     //attempt to start the service and bind the model
     public start() :void  {
-        if (this._model === null) {
-           Logger.log("Model Binding Error", true, true);
-        }
         Logger.log(`${this._serviceName} Started... `, true, true);
     }    
 
