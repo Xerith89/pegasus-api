@@ -2,7 +2,7 @@ import { Service } from "../core/Service";
 import sayHello from '../contributors/ExampleContributor';
 import Logger from '../core/Logger'
 
-export default class ExampleScheme extends Service {
+export default class ExampleService extends Service {
  
     constructor(attributes: {}, serviceName: string, exposeToBackend :boolean) {
         super(attributes)
