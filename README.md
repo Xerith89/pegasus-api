@@ -16,23 +16,20 @@ Typically the following steps are what you need to get going -
 
 You do this by extending the Service class and providing definitions for `Start :void`, `Stop :void` and `Invoke :object` methods. 
 
-The Invoke method is where you construct a response that will be returned to the caller of the endpoint. It should be a JSON object and will services to communicate with eachother. You can call other services in your service Invoke or you can call contributors to aid in building your response. For instance, you may wish to make a database call and a contributor is probably the best place to do this.
+The Invoke method is where you construct a response that will be returned to the caller of the endpoint. It should be a JSON object to allow services to communicate with eachother. You can call other services in your service `invoke` or you can call contributors to aid in building your response. For instance, you may wish to make a database call and a contributor is probably the best place to do this due to the async nature of that transaction.
 
 ##### Add Contributors (Optional)
 
-Contributors are small modular functions that you can reused in any of your schemes.
+Contributors are small modular functions that you can reused in any of your services.
 
-The example shows how to use a contributor in building a scheme response.
+The example shows how to use a contributor in building a service response.
 
-##### Define a service model 
+##### Construct the service
 
-This is the data that your scheme uses and will be compared against the request object body to make sure we have a valid request. The API does not validate the data, this is left to you when you implement as part of your service.
+A service constructor takes 3 parameters - the attributes for your service  (an empty object can be passed if your service requires no attributes), the service name and whether the service is exposed to an endpoint.
+n.b. The service name is important as it will be used for the url endpoint  e.g. /api/{servicename} - they are case sensitive!
 
-##### Construct the scheme with the model and name as input parameters
-
-n.b. The scheme name is important as it will be used for the url endpoint and it is set in the constructor for the scheme  e.g. /api/{servicename} - they are case sensitive!
-
-##### Add your scheme to the register services array
+##### Add your service to the register services array
 
 Pegasus will automatically create a route for your endpoint if you wish for the service to be exposed. In order to facilitate testing and other future expansions, it is possible to pass a container as a separate parameter if you do not want your services going into the default container.
 
