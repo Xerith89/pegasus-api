@@ -23,17 +23,18 @@ export default class ExampleService extends Service {
     public invoke(req:any, res:any) :any
     {
         if (this._status) {
-            Logger.log(`${this._serviceName} Invoked From ${req.baseUrl}`, true,true);
+            Logger.log(`${this._serviceName} Invoked From ${req.baseUrl} with ${JSON.stringify(this._attributes)}`, true,true);
             
-            //Signal a successful service call
-            Logger.log("Service Complete Successfully", true, true);
-
             //We are using a contributor function here to build our json response
-            return {
+            const response =  {
                 name: req.body.name, 
                 age:req.body.age, 
                 message: sayHello(req.body.name)
             } ;
+
+            //Signal a successful service call
+            Logger.log(`Service Complete Successfully - response: ${JSON.stringify(response)}`, true, true);
+            return response
         }
 
         //Service is not running
