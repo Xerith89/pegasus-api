@@ -1,6 +1,5 @@
 import ServiceController from './src/core/ServiceController';
 import ExampleService from './src/services/ExampleService';
-import ExampleServiceModel from './src/services/ExampleServiceModel';
 import express = require('express');
 import helmet = require('helmet');
 import cors = require('cors');
@@ -14,11 +13,8 @@ const serviceContainer = new ServiceController();
 //Config our local settings
 dotenv.config();
 
-//Bring in your models
-const exampleServiceModel = new ExampleServiceModel();
-
-//Bring in your schemes, bind the model, name them and decide if they are exposed to the endpoint
-const exampleService = new ExampleService(exampleServiceModel, 'exampleservice', true);
+//Bring in your schemes
+const exampleService = new ExampleService({name : "", age: 0}, 'exampleservice', true);
 
 //Register your schemes in the service container here
 serviceContainer.registerServices([exampleService]);

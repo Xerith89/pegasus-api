@@ -17,8 +17,9 @@ router.post('/', function (req:any, res:any) {
                 Logger.log(`Bad Request ${serviceName}`, true, true)
                 return;
             }
-
-            res.json( requestedService.Invoke(req, res));
+            try {
+            res.json( requestedService.invoke(req, res));
+            } catch (error) { Logger.log(error,true,true); }
         } else {
             //Endpoint is forbidden
             res.status(403).end();

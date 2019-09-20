@@ -4,9 +4,9 @@ export abstract class Service {
     protected _serviceName = "";
     protected _status = false;
 
-    protected _model: {} = {};
-    constructor(model: any){
-        this._model = model.getModel();
+    protected _attributes: {} = {};
+    constructor(atttributes: {}){
+        this._attributes = atttributes;
 
     }
 
@@ -14,9 +14,9 @@ export abstract class Service {
     abstract stop() : void;
     abstract invoke(req: any, res:any): {};
 
-    //Check that the model data is within the body of the request
+    //Check that if we have attributes then they are in the request body
     protected validateInput(req: any) :boolean {
-        for (let [key] of Object.entries(this._model)) {
+        for (let [key] of Object.entries(this._attributes)) {
             if (!req.body.hasOwnProperty(key)) {
                 return false;
             }

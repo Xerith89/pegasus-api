@@ -1,12 +1,11 @@
 import { Service } from "../src/core/Service";
-import {Model} from '../src/core/Model';
 import sayHello from '../src/contributors/ExampleContributor';
 import Logger from '../src/core/Logger'
 
 export default class TestService extends Service {
  
-    constructor(model : Model, serviceName: string, exposeToBackend :boolean) {
-        super(model)
+    constructor(attributes: {}, serviceName: string, exposeToBackend :boolean) {
+        super(attributes)
         //Assign member data
         this._exposeToBackend = exposeToBackend;
         this._serviceName = serviceName;
@@ -14,9 +13,6 @@ export default class TestService extends Service {
 
     //attempt to start the service and bind the model
     public start() :void  {
-        if (this._model === null) {
-           Logger.log("Model Binding Error", true, true);
-        }
         Logger.log(`${this._serviceName} Started... `, true, true);
     }    
 
@@ -33,7 +29,7 @@ export default class TestService extends Service {
             Logger.log("Service Complete Successfully", true, true);
 
             //We are using a contributor function here to build our json response
-            return {
+            return this._attributes = {
                 name: req.body.name, 
                 age:req.body.age, 
                 message: sayHello(req.body.name)

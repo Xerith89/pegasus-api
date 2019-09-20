@@ -1,5 +1,3 @@
-import { Stream } from "stream";
-
 var fs = require("fs");
 
 export default class Logger {
