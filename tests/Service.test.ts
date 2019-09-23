@@ -1,7 +1,7 @@
 import ServiceController from '../src/core/ServiceController';
 import {Service} from '../src/core/Service';
 
-import TestService from './TestService';
+import ExampleService from '../src/services/ExampleService';
 
 
 test('service isExposed functions as expected', () => {
@@ -9,11 +9,11 @@ test('service isExposed functions as expected', () => {
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
   
-    const service = new TestService({
+    const service = new ExampleService({
         name: "", 
         age: 0}
         , "testservice",true);
-    const secondService = new TestService({
+    const secondService = new ExampleService({
         name: "", 
         age: 0}, "testservicetwo",false);
 
@@ -30,11 +30,11 @@ test('service isRunning functions as expected', () => {
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
    
-    const service = new TestService({
+    const service = new ExampleService({
         name: "", 
         age: 0}
         , "testservice",true);
-    const secondService = new TestService({
+    const secondService = new ExampleService({
         name: "", 
         age: 0}, "testservicetwo",false);
 
@@ -52,11 +52,11 @@ test('service isRunning functions as expected', () => {
     //Arrange
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
-    const service = new TestService({
+    const service = new ExampleService({
         name: "", 
         age: 0}
         , "testservice",true);
-    const secondService = new TestService({
+    const secondService = new ExampleService({
         name: "", 
         age: 0}, "testservicetwo",false);
 
@@ -73,7 +73,7 @@ test('service updateRunningStatus functions as expected', () => {
     //Arrange
     let serviceContainer : Service[] = [];
     const controller = new ServiceController();
-    const service = new TestService({
+    const service = new ExampleService({
         name: "", 
         age: 0}
         , "testservice",true);
