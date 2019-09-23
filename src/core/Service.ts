@@ -1,13 +1,14 @@
 
 export abstract class Service {
-    protected _exposeToBackend = false;
-    protected _serviceName = "";
-    protected _status = false;
+    private _exposeToBackend = false;
+    private _serviceName = "";
+    private _status = false;
 
     protected _attributes: {} = {};
-    constructor(atttributes: {}){
-        this._attributes = atttributes;
-
+    constructor(attributes: {}, serviceName:string, exposeToBackend:boolean){
+        this._attributes = attributes;
+        this._serviceName = serviceName;
+        this._exposeToBackend = exposeToBackend;
     }
 
     abstract start() : void;
