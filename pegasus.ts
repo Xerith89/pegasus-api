@@ -15,8 +15,8 @@ const serviceContainer = new ServiceController();
 dotenv.config();
 
 //Bring in your schemes
-const exampleService = new ExampleService({name : "", age: 0}, 'exampleservice', true);
-const exampleServiceTwo = new ExampleTwo({}, 'exampletwo', true);
+const exampleService = new ExampleService({name : null, age: null}, 'exampleservice', true);
+const exampleServiceTwo = new ExampleTwo({numberA: null, numberB: null}, 'exampletwo', true);
 
 //Register your schemes in the service container here
 serviceContainer.registerServices([exampleService, exampleServiceTwo]);

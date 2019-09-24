@@ -1,6 +1,6 @@
 import { Service } from "../core/Service";
-import sayHello from '../contributors/ExampleContributor';
 import Logger from '../core/Logger'
+import add from "../contributors/ExampleTwo";
 
 export default class ExampleTwo extends Service {
  
@@ -24,10 +24,9 @@ export default class ExampleTwo extends Service {
 
             //We are using a contributor function here to build our json response
             //Async so that we wait for the functions to complete before building the response
-            const message = await "This is service two";
+            const result = await add(req.body.numberA, req.body.numberB);
             const response =  {
-                    
-                    message: message
+                   result: result
                 } ;
         
             //Signal a successful service call
