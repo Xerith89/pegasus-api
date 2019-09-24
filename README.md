@@ -16,7 +16,9 @@ Typically the following steps are what you need to get going -
 
 You do this by extending the Service class and providing definitions for `Start :void`, `Stop :void` and `Invoke :object` methods. 
 
-The Invoke method is where you construct a response that will be returned to the caller of the endpoint. It should be a JSON object to allow services to communicate with eachother. You can call other services in your service `invoke` or you can call contributors to aid in building your response. For instance, you may wish to make a database call and a contributor is probably the best place to do this due to the async nature of that transaction.
+The 'invoke' method is where you construct a response that will be returned to the caller of the endpoint. It should be a JSON object to allow services to communicate with eachother. You can call other services in your service `invoke` or you can call contributors to aid in building your response. 
+
+The 'invoke' method is async to allow you to wait for contributors without blocking the main execution thread. There has also been a boost to performance with a non async sample service taking 45ms against 5ms for the async version. This means that 'invoke' will now return a promise and this should be handled accordingly.
 
 ##### Add Contributors (Optional)
 
