@@ -5,10 +5,11 @@ import helmet = require('helmet');
 import cors = require('cors');
 import dotenv = require('dotenv');
 import ExampleTwo from './src/services/ExampleTwo';
+import Logger from './src/core/Logger';
 
 //Bring in core dependencies 
 const pegasus = express();
-const serviceRouter = require('./src/core/ServiceRouter');
+import serviceRouter from './src/core/ServiceRouter';
 const serviceContainer = new ServiceController();
 
 //Config our local settings
@@ -79,7 +80,7 @@ rl.on('line', function(line:string) {
 //Stop all services on server close
 server.on('close', function() {
     serviceContainer.stopServices();
-    console.log('Pegasus Has Exited.');
+    Logger.log('Pegasus Has Exited.', true, true);
 });
 
 module.exports = server;

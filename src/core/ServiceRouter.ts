@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 
-router.post('/', function (req:any, res:any) {
+export default router.post('/', function (req:any, res:any) {
     let serviceName:string = req.baseUrl.substr(req.baseUrl.lastIndexOf('/') + 1);
     const requestedService = ServiceController.FindService(serviceName);
     if (requestedService !== undefined){
