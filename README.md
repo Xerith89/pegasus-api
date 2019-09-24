@@ -35,10 +35,6 @@ n.b. The service name is important as it will be used for the url endpoint  e.g.
 
 Pegasus will automatically create a route for your endpoint if you wish for the service to be exposed. In order to facilitate testing and other future expansions, it is possible to pass a container as a separate parameter if you do not want your services going into the default container.
 
-##### Configure the service route
-
-You will need to configure the service in the ServiceRouter class. For now there is a bit of boiler plate involved, basically you can copy the example code and then modify the returns how you wish. There are plans to abstract this in future releases.
-
 ##### You are now ready to make POST requests to your service!
 
 #### Console Commands
