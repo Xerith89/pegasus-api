@@ -41,7 +41,7 @@ Pegasus will automatically create a route for your endpoint if you wish for the 
 
 The follow commands are available from the console whilst the system is running - 
 
-`shutdown` - Performs a graceful shutdown on the Pegasus server after stopping all services. 
+`shutdown` - Stops all services and performs a graceful shutdown on the Pegasus server. 
 
 `startall` - Start all non running services.
 
