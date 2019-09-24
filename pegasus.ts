@@ -4,6 +4,7 @@ import express = require('express');
 import helmet = require('helmet');
 import cors = require('cors');
 import dotenv = require('dotenv');
+import ExampleTwo from './src/services/ExampleTwo';
 
 //Bring in core dependencies 
 const pegasus = express();
@@ -15,9 +16,10 @@ dotenv.config();
 
 //Bring in your schemes
 const exampleService = new ExampleService({name : "", age: 0}, 'exampleservice', true);
+const exampleServiceTwo = new ExampleTwo({}, 'exampletwo', true);
 
 //Register your schemes in the service container here
-serviceContainer.registerServices([exampleService]);
+serviceContainer.registerServices([exampleService, exampleServiceTwo]);
 
 //Start all registered services
 serviceContainer.startServices();
