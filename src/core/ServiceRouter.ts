@@ -18,7 +18,10 @@ router.post('/', function (req:any, res:any) {
                 return;
             }
             try {
-            res.json( requestedService.invoke(req, res));
+                requestedService.invoke(req, res).then((data: any) =>{
+                    res.json(data);
+                });
+            
             } catch (error) { Logger.log(error,true,true); }
         } else {
             //Endpoint is forbidden

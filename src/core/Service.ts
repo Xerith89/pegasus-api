@@ -13,7 +13,7 @@ export abstract class Service {
 
     abstract start() : void;
     abstract stop() : void;
-    abstract invoke(req: any, res:any): {};
+    abstract async invoke(req: any, res:any):Promise<{}>
 
     //Check that if we have attributes then they are in the request body
     protected validateInput(req: any) :boolean {

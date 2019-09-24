@@ -1,6 +1,6 @@
 import ServiceController from '../src/core/ServiceController';
 import {Service} from '../src/core/Service';
-import TestService from './TestService';
+import TestService from '../src/services/ExampleService';
 
 
 test('registerServices should add a service correctly', () => {

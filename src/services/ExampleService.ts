@@ -17,21 +17,23 @@ export default class ExampleService extends Service {
         Logger.log(`${this.getServiceName()} Stopped... `, true, true);
     }
 
-    public invoke(req:any, res:any) :any
+    public async invoke(req:any, res:any) :Promise<any>
     {
         if (this.isRunning()) {
-            Logger.log(`${this.getServiceName()} Invoked From ${req.baseUrl} with ${JSON.stringify(this._attributes)}`, true,true);
-            
-            //We are using a contributor function here to build our json response
-            const response =  {
-                name: req.body.name, 
-                age:req.body.age, 
-                message: sayHello(req.body.name)
-            } ;
+            Logger.log(`${this.getServiceName()} Invoked From ${req.baseUrl} with ${JSON.stringify(req.body)}`, true,true);
 
+            //We are using a contributor function here to build our json response
+            //Async so that we wait for the functions to complete before building the response
+            const message = await sayHello(req.body.name);
+            const response =  {
+                    name: req.body.name, 
+                    age:req.body.age, 
+                    message: message
+                } ;
+        
             //Signal a successful service call
             Logger.log(`Service Complete Successfully - response: ${JSON.stringify(response)}`, true, true);
-            return response
+            return response;
         }
 
         //Service is not running
