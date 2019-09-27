@@ -8,7 +8,7 @@ A lightweight open source API for creating, running and managing micro-services 
 
 ### How do I use it?
 
-The project is still in development but you are welcome to use it any way you wish.
+The project is still in development but there is now a release build available.
 
 Typically the following steps are what you need to get going -
 
